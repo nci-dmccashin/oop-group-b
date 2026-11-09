@@ -9,10 +9,10 @@ package expirytrack;
  * @author mtrsi
  */
 public class wasteRecord {
-    private double wasteAmount;
+    protected double wasteAmount;
     private String units;
     private String item;
-    private String wasteType;
+    protected String wasteType;
 
     public wasteRecord() {
     }

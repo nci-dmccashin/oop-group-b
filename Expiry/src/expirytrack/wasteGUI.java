@@ -60,7 +60,7 @@ public class wasteGUI extends JFrame{
         itemTf = new JTextField();
         wasteTypeTf = new JTextField();
         
-        nextBtn = new JButton("next record");
+        nextBtn = new JButton("save/next record");
         disposalBtn = new JButton("Show Disposal Method");
         reportBtn = new JButton("Go to end");
         
