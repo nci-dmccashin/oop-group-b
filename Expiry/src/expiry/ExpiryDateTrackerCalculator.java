@@ -69,7 +69,8 @@ public class ExpiryDateTrackerCalculator {
             
             // Get days left
             var timeLeft  = Duration.between(LocalDateTime.now(), expiryDateFormatted).toDays();
-            System.out.println(timeLeft);
+            // Conver timeLeft (long) to int and insert into HashMap
+            foodItemsDaysRemaining.put(Math.toIntExact(timeLeft), foodItem);
         }
     }
 }
