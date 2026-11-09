@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * @author danie
  */
 public class ExpiryDateTrackerManager {
-    protected ArrayList<FoodProduct> foodItems = new ArrayList();
+    protected ArrayList<FoodProduct> foodItems;
 
     public ArrayList<FoodProduct> getFoodItems() {
         return foodItems;
