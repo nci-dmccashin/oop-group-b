@@ -8,14 +8,16 @@ package expirytrack;
  *
  * @author mtrsi
  */
-public class wasteReport {
+public class wasteReport extends wasteRecord {
     private double totalWaste;
     private String wasteDate;
 
     public wasteReport() {
     }
 
-    public wasteReport(double totalWaste, String wasteDate) {
+    public wasteReport(double wasteAmount, String units, String item,
+            String wasteType, double totalWaste, String wasteDate) {
+        super(wasteAmount, units, item, wasteType);
         this.totalWaste = totalWaste;
         this.wasteDate = wasteDate;
     }
@@ -38,7 +40,8 @@ public class wasteReport {
      public String printDetails(){
          return "Waste report" 
                  + "\nTotal waste: " +totalWaste + " kg"
-                 + "\nReport date: "+wasteDate;
+                 + "\nReport date: "+wasteDate
+                 +"\nWaste type: " + wasteType;
      }
     
     
