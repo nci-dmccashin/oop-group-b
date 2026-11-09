@@ -22,8 +22,8 @@ public class ExpiryApp {
         // TODO code application logic here
         // Temporary: Create 6 food items
         for (int i = 0; i <= 3; i++) {
-           foodProducts.add(new FoodProduct("Apple", "fruit", 2, "11/11/2026"));
-           foodProducts.add(new FoodProduct("Bread", "baked", 1, "15/11/2026"));
+           foodProducts.add(new FoodProduct("Apple", "fruit", 2, "11 11 2026"));
+           foodProducts.add(new FoodProduct("Bread", "baked", 1, "15 11 2026"));
         }
         
         ExpiryDateTrackerManager edtm = new ExpiryDateTrackerManager(foodProducts);

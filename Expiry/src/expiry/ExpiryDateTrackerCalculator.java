@@ -4,7 +4,13 @@
  */
 package expiry;
 
+import java.text.DateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 
 /**
  *
@@ -16,6 +22,9 @@ public class ExpiryDateTrackerCalculator {
     // ArrayList is instatiated as it is created in this class
     protected ArrayList<FoodProduct> expiringSoonFoodItems = new ArrayList();
     protected ArrayList<FoodProduct> expiringLongFoodItems = new ArrayList();
+    
+    // HashMap of food items in days remaining (days remaining, FoodProduct)
+    protected HashMap<Integer, FoodProduct> foodItemsTimeRemaining = new HashMap();
 
     public ArrayList<FoodProduct> getFoodItems() {
         return foodItems;
@@ -46,6 +55,14 @@ public class ExpiryDateTrackerCalculator {
     }
     
     public void calculateFoodExpiration() {
-        
+        // Loop through food items and add to hashmap
+        Iterator<FoodProduct> foodItemsIt = foodItems.iterator();
+        while (foodItemsIt.hasNext()) {
+            FoodProduct foodItem = foodItemsIt.next();
+            
+            // Create DateTimeFormatter to format expiryDate as dd-mm-YYYY so it can be subtracted from today's date
+            DateTimeFormatter expiryDateFormatter = DateTimeFormatter.ofPattern("dd MM yyyy");
+            LocalDate expiryDateFormatted = LocalDate.parse(foodItem.getExpiryDate(), expiryDateFormatter);
+        }
     }
 }
