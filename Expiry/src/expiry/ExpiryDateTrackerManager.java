@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class ExpiryDateTrackerManager {
     protected ArrayList<FoodProduct> foodItems;
     protected ExpiryDateTrackerCalculator expiryDateTrackerCalculator;
+    protected ExpiryDateTrackerGUI expiryGUI;
 
     public ArrayList<FoodProduct> getFoodItems() {
         return foodItems;
@@ -26,6 +27,9 @@ public class ExpiryDateTrackerManager {
         this.foodItems = foodItems;
         this.expiryDateTrackerCalculator = new ExpiryDateTrackerCalculator(foodItems);
         expiryDateTrackerCalculator.calculateFoodExpiration();
+        this.expiryGUI = new ExpiryDateTrackerGUI();
+        expiryGUI.setFoodItems(foodItems);
+        expiryGUI.setVisible(true);
     }
     
 }

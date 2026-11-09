@@ -4,6 +4,8 @@
  */
 package expiry;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author danie
@@ -11,13 +13,24 @@ package expiry;
 public class ExpiryDateTrackerGUI extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ExpiryDateTrackerGUI.class.getName());
-    protected ItemsExpiringSoonGUI ItemsExpiringSoonGUI = new ItemsExpiringSoonGUI();
+    protected ItemsExpiringSoonGUI ItemsExpiringSoonGUI;
+    protected ArrayList<FoodProduct> foodItems;
+
+    public ArrayList<FoodProduct> getFoodItems() {
+        return foodItems;
+    }
+
+    public void setFoodItems(ArrayList<FoodProduct> foodItems) {
+        this.foodItems = foodItems;
+    }
     
     /**
      * Creates new form ExpiryDateTrackerGUI
      */
     public ExpiryDateTrackerGUI() {
         initComponents();
+        ItemsExpiringSoonGUI = new ItemsExpiringSoonGUI();
+        ItemsExpiringSoonGUI.setFoodItems(foodItems);
     }
 
     /**
