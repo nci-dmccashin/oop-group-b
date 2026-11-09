@@ -25,7 +25,6 @@ public class ExpiryApp {
            foodProducts.add(new FoodProduct("Apple", "fruit", 2, "11/11/2026"));
            foodProducts.add(new FoodProduct("Bread", "baked", 1, "15/11/2026"));
         }
-        Iterator<FoodProduct> it = foodProducts.iterator();
     }
     
 }
