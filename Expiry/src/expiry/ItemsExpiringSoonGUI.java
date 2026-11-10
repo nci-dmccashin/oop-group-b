@@ -5,6 +5,7 @@
 package expiry;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  *
@@ -21,7 +22,15 @@ public class ItemsExpiringSoonGUI extends javax.swing.JFrame implements ExpiryDa
     public ItemsExpiringSoonGUI(ArrayList<FoodProduct> foodItems) {
         initComponents();
         this.foodItems = foodItems;
-        System.out.println(this.foodItems);
+        
+        // Loop over food items and output
+        Iterator<FoodProduct> it = foodItems.iterator();
+        StringBuffer output = new StringBuffer();
+        while (it.hasNext()) {
+            output.append(it.next().printDetails());
+            output.append("\n");
+        }
+        resultsTA.setText(output.toString());
     }
 
     @Override
