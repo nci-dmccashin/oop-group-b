@@ -22,7 +22,11 @@ public class ItemsExpiringLastGUI extends javax.swing.JFrame {
     public ItemsExpiringLastGUI(ArrayList<FoodProduct> foodItems) {
         initComponents();
         this.foodItems = foodItems;
-        
+        displayFoodItems();
+    }
+    
+    private void displayFoodItems() {
+        // Make seperate function as refresh is required if ArrayList changes
         
         // Loop over food items and output
         Iterator<FoodProduct> it = foodItems.iterator();
@@ -48,6 +52,7 @@ public class ItemsExpiringLastGUI extends javax.swing.JFrame {
         itemsNotExpiring7DaysTL = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         resultsTA = new javax.swing.JTextArea();
+        refreshBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,6 +68,9 @@ public class ItemsExpiringLastGUI extends javax.swing.JFrame {
         resultsTA.setRows(5);
         jScrollPane1.setViewportView(resultsTA);
 
+        refreshBtn.setText("Refresh");
+        refreshBtn.addActionListener(this::refreshBtnActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -70,11 +78,17 @@ public class ItemsExpiringLastGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(titleTL)
-                    .addComponent(subtitleTL)
-                    .addComponent(itemsNotExpiring7DaysTL)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(35, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                        .addComponent(refreshBtn)
+                        .addGap(33, 33, 33))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(titleTL)
+                            .addComponent(subtitleTL)
+                            .addComponent(itemsNotExpiring7DaysTL))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -86,12 +100,19 @@ public class ItemsExpiringLastGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(itemsNotExpiring7DaysTL)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(refreshBtn))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void refreshBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshBtnActionPerformed
+        // TODO add your handling code here:
+        displayFoodItems();
+    }//GEN-LAST:event_refreshBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -121,6 +142,7 @@ public class ItemsExpiringLastGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel itemsNotExpiring7DaysTL;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton refreshBtn;
     private javax.swing.JTextArea resultsTA;
     private javax.swing.JLabel subtitleTL;
     private javax.swing.JLabel titleTL;

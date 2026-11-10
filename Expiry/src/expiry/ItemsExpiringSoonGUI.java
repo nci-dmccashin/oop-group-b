@@ -22,6 +22,11 @@ public class ItemsExpiringSoonGUI extends javax.swing.JFrame implements ExpiryDa
     public ItemsExpiringSoonGUI(ArrayList<FoodProduct> foodItems) {
         initComponents();
         this.foodItems = foodItems;
+        displayFoodItems();
+    }
+    
+    private void displayFoodItems() {
+        // Make seperate function as refresh is required if ArrayList changes
         
         // Loop over food items and output
         Iterator<FoodProduct> it = foodItems.iterator();
@@ -57,6 +62,7 @@ public class ItemsExpiringSoonGUI extends javax.swing.JFrame implements ExpiryDa
         noOfExpiringItemsTL = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         resultsTA = new javax.swing.JTextArea();
+        refreshBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,6 +78,9 @@ public class ItemsExpiringSoonGUI extends javax.swing.JFrame implements ExpiryDa
         resultsTA.setRows(5);
         jScrollPane1.setViewportView(resultsTA);
 
+        refreshBtn.setText("Refresh");
+        refreshBtn.addActionListener(this::refreshBtnActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -82,7 +91,10 @@ public class ItemsExpiringSoonGUI extends javax.swing.JFrame implements ExpiryDa
                     .addComponent(titleTL)
                     .addComponent(subtitleTL)
                     .addComponent(noOfExpiringItemsTL)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(refreshBtn)))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -95,12 +107,19 @@ public class ItemsExpiringSoonGUI extends javax.swing.JFrame implements ExpiryDa
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(noOfExpiringItemsTL)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(refreshBtn))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void refreshBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshBtnActionPerformed
+        // TODO add your handling code here:
+        displayFoodItems();
+    }//GEN-LAST:event_refreshBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -130,6 +149,7 @@ public class ItemsExpiringSoonGUI extends javax.swing.JFrame implements ExpiryDa
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel noOfExpiringItemsTL;
+    private javax.swing.JButton refreshBtn;
     private javax.swing.JTextArea resultsTA;
     private javax.swing.JLabel subtitleTL;
     private javax.swing.JLabel titleTL;
