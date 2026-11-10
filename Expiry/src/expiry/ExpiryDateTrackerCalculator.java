@@ -18,7 +18,7 @@ import java.util.Iterator;
  *
  * @author danie
  */
-public class ExpiryDateTrackerCalculator {
+public class ExpiryDateTrackerCalculator implements ExpiryDateCommonInterface {
     // ArrayList isn't instatianted as ArrayList should be passed from parent class
     protected ArrayList<FoodProduct> foodItems;
     // ArrayList is instatiated as it is created in this class

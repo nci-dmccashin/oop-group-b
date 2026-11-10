@@ -10,7 +10,7 @@ import java.util.ArrayList;
  *
  * @author danie
  */
-public class ItemsExpiringSoonGUI extends javax.swing.JFrame {
+public class ItemsExpiringSoonGUI extends javax.swing.JFrame implements ExpiryDateCommonInterface {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ItemsExpiringSoonGUI.class.getName());
     protected ArrayList<FoodProduct> foodItems;

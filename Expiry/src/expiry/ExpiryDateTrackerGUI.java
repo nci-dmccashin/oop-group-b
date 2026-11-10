@@ -10,7 +10,7 @@ import java.util.ArrayList;
  *
  * @author danie
  */
-public class ExpiryDateTrackerGUI extends javax.swing.JFrame {
+public class ExpiryDateTrackerGUI extends javax.swing.JFrame implements ExpiryDateCommonInterface {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ExpiryDateTrackerGUI.class.getName());
     protected ItemsExpiringSoonGUI ItemsExpiringSoonGUI;
