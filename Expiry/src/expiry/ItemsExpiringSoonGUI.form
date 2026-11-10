@@ -26,9 +26,9 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="titleTF" min="-2" max="-2" attributes="0"/>
-                  <Component id="subtitleTF" min="-2" max="-2" attributes="0"/>
-                  <Component id="noOfExpiringItemsTF" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="titleTL" min="-2" max="-2" attributes="0"/>
+                  <Component id="subtitleTL" min="-2" max="-2" attributes="0"/>
+                  <Component id="noOfExpiringItemsTL" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="27" max="32767" attributes="0"/>
@@ -39,11 +39,11 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="titleTF" min="-2" max="-2" attributes="0"/>
+              <Component id="titleTL" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="subtitleTF" min="-2" max="-2" attributes="0"/>
+              <Component id="subtitleTL" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="noOfExpiringItemsTF" min="-2" max="-2" attributes="0"/>
+              <Component id="noOfExpiringItemsTL" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="174" max="-2" attributes="0"/>
               <EmptySpace pref="32" max="32767" attributes="0"/>
@@ -52,7 +52,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="titleTF">
+    <Component class="javax.swing.JLabel" name="titleTL">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="24" style="1"/>
@@ -60,12 +60,12 @@
         <Property name="text" type="java.lang.String" value="Items Expiring Soon"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="subtitleTF">
+    <Component class="javax.swing.JLabel" name="subtitleTL">
       <Properties>
         <Property name="text" type="java.lang.String" value="You should use the following items (in order of expiration date) soon:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="noOfExpiringItemsTF">
+    <Component class="javax.swing.JLabel" name="noOfExpiringItemsTL">
       <Properties>
         <Property name="text" type="java.lang.String" value="No. of items expiring in the next 3 days: {x}"/>
       </Properties>

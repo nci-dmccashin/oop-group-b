@@ -52,20 +52,20 @@ public class ItemsExpiringSoonGUI extends javax.swing.JFrame implements ExpiryDa
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        titleTF = new javax.swing.JLabel();
-        subtitleTF = new javax.swing.JLabel();
-        noOfExpiringItemsTF = new javax.swing.JLabel();
+        titleTL = new javax.swing.JLabel();
+        subtitleTL = new javax.swing.JLabel();
+        noOfExpiringItemsTL = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         resultsTA = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        titleTF.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        titleTF.setText("Items Expiring Soon");
+        titleTL.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        titleTL.setText("Items Expiring Soon");
 
-        subtitleTF.setText("You should use the following items (in order of expiration date) soon:");
+        subtitleTL.setText("You should use the following items (in order of expiration date) soon:");
 
-        noOfExpiringItemsTF.setText("No. of items expiring in the next 3 days: {x}");
+        noOfExpiringItemsTL.setText("No. of items expiring in the next 3 days: {x}");
 
         resultsTA.setEditable(false);
         resultsTA.setColumns(20);
@@ -79,9 +79,9 @@ public class ItemsExpiringSoonGUI extends javax.swing.JFrame implements ExpiryDa
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(titleTF)
-                    .addComponent(subtitleTF)
-                    .addComponent(noOfExpiringItemsTF)
+                    .addComponent(titleTL)
+                    .addComponent(subtitleTL)
+                    .addComponent(noOfExpiringItemsTL)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
@@ -89,11 +89,11 @@ public class ItemsExpiringSoonGUI extends javax.swing.JFrame implements ExpiryDa
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(titleTF)
+                .addComponent(titleTL)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(subtitleTF)
+                .addComponent(subtitleTL)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(noOfExpiringItemsTF)
+                .addComponent(noOfExpiringItemsTL)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(32, Short.MAX_VALUE))
@@ -129,9 +129,9 @@ public class ItemsExpiringSoonGUI extends javax.swing.JFrame implements ExpiryDa
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel noOfExpiringItemsTF;
+    private javax.swing.JLabel noOfExpiringItemsTL;
     private javax.swing.JTextArea resultsTA;
-    private javax.swing.JLabel subtitleTF;
-    private javax.swing.JLabel titleTF;
+    private javax.swing.JLabel subtitleTL;
+    private javax.swing.JLabel titleTL;
     // End of variables declaration//GEN-END:variables
 }
