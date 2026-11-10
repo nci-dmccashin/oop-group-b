@@ -15,6 +15,7 @@ public class ExpiryDateTrackerGUI extends javax.swing.JFrame implements ExpiryDa
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ExpiryDateTrackerGUI.class.getName());
     protected ItemsExpiringSoonGUI ItemsExpiringSoonGUI;
     protected ItemsExpiringLastGUI ItemsExpiringLastGUI;
+    protected AddMoreGUI AddMoreGUI;
     protected ArrayList<FoodProduct> foodItems;
 
     @Override
@@ -33,8 +34,9 @@ public class ExpiryDateTrackerGUI extends javax.swing.JFrame implements ExpiryDa
     public ExpiryDateTrackerGUI(ArrayList<FoodProduct> foodItems) {
         initComponents();
         this.foodItems = foodItems;
-        ItemsExpiringSoonGUI = new ItemsExpiringSoonGUI(foodItems);
-        ItemsExpiringLastGUI = new ItemsExpiringLastGUI(foodItems);
+        this.ItemsExpiringSoonGUI = new ItemsExpiringSoonGUI(foodItems);
+        this.ItemsExpiringLastGUI = new ItemsExpiringLastGUI(foodItems);
+        this.AddMoreGUI = new AddMoreGUI(foodItems);
     }
 
     /**
@@ -69,6 +71,7 @@ public class ExpiryDateTrackerGUI extends javax.swing.JFrame implements ExpiryDa
         itemsExpiringLastButton.addActionListener(this::itemsExpiringLastButtonActionPerformed);
 
         addMoreItemsButton.setText("Add more items");
+        addMoreItemsButton.addActionListener(this::addMoreItemsButtonActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -120,6 +123,11 @@ public class ExpiryDateTrackerGUI extends javax.swing.JFrame implements ExpiryDa
         // TODO add your handling code here:
         ItemsExpiringLastGUI.setVisible(true);
     }//GEN-LAST:event_itemsExpiringLastButtonActionPerformed
+
+    private void addMoreItemsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMoreItemsButtonActionPerformed
+        // TODO add your handling code here:
+        AddMoreGUI.setVisible(true);
+    }//GEN-LAST:event_addMoreItemsButtonActionPerformed
 
     /**
      * @param args the command line arguments
