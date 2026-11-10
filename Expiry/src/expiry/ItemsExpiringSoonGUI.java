@@ -22,10 +22,12 @@ public class ItemsExpiringSoonGUI extends javax.swing.JFrame implements ExpiryDa
         initComponents();
     }
 
+    @Override
     public ArrayList<FoodProduct> getFoodItems() {
         return foodItems;
     }
 
+    @Override
     public void setFoodItems(ArrayList<FoodProduct> foodItems) {
         this.foodItems = foodItems;
     }

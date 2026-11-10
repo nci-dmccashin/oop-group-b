@@ -15,10 +15,12 @@ public class ExpiryDateTrackerManager implements ExpiryDateCommonInterface {
     protected ExpiryDateTrackerCalculator expiryDateTrackerCalculator;
     protected ExpiryDateTrackerGUI expiryGUI;
 
+    @Override
     public ArrayList<FoodProduct> getFoodItems() {
         return foodItems;
     }
 
+    @Override
     public void setFoodItems(ArrayList<FoodProduct> foodItems) {
         this.foodItems = foodItems;
     }

@@ -28,10 +28,12 @@ public class ExpiryDateTrackerCalculator implements ExpiryDateCommonInterface {
     // HashMap of food items in days remaining (days remaining, FoodProduct)
     protected HashMap<Integer, FoodProduct> foodItemsDaysRemaining = new HashMap();
 
+    @Override
     public ArrayList<FoodProduct> getFoodItems() {
         return foodItems;
     }
 
+    @Override
     public void setFoodItems(ArrayList<FoodProduct> foodItems) {
         this.foodItems = foodItems;
     }

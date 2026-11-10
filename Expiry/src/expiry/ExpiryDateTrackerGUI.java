@@ -16,10 +16,12 @@ public class ExpiryDateTrackerGUI extends javax.swing.JFrame implements ExpiryDa
     protected ItemsExpiringSoonGUI ItemsExpiringSoonGUI;
     protected ArrayList<FoodProduct> foodItems;
 
+    @Override
     public ArrayList<FoodProduct> getFoodItems() {
         return foodItems;
     }
 
+    @Override
     public void setFoodItems(ArrayList<FoodProduct> foodItems) {
         this.foodItems = foodItems;
     }
