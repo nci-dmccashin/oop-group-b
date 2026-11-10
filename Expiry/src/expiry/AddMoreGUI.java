@@ -52,14 +52,7 @@ public class AddMoreGUI extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
         jLabel1.setText("Add More Items");
 
-        nameTI.setText("Name");
         nameTI.addActionListener(this::nameTIActionPerformed);
-
-        categoryTI.setText("Category");
-
-        quantityTI.setText("Quantity");
-
-        expiryDateTI.setText("Expiry Date");
 
         nameTL.setText("Name of your item");
 
@@ -150,6 +143,7 @@ public class AddMoreGUI extends javax.swing.JFrame {
         foodItems.add(newProduct);
         
         // Display preview
+        previewTA.setVisible(true);
         previewTA.setText(newProduct.printDetails());
     }//GEN-LAST:event_createBtnActionPerformed
 

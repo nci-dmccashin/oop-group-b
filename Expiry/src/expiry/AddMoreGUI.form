@@ -92,27 +92,15 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="nameTI">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Name"/>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nameTIActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="categoryTI">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Category"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="quantityTI">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Quantity"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="expiryDateTI">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Expiry Date"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="nameTL">
       <Properties>
