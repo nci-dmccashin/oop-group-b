@@ -14,6 +14,7 @@ public class ExpiryDateTrackerGUI extends javax.swing.JFrame implements ExpiryDa
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ExpiryDateTrackerGUI.class.getName());
     protected ItemsExpiringSoonGUI ItemsExpiringSoonGUI;
+    protected ItemsExpiringLastGUI ItemsExpiringLastGUI;
     protected ArrayList<FoodProduct> foodItems;
 
     @Override
@@ -33,6 +34,7 @@ public class ExpiryDateTrackerGUI extends javax.swing.JFrame implements ExpiryDa
         initComponents();
         this.foodItems = foodItems;
         ItemsExpiringSoonGUI = new ItemsExpiringSoonGUI(foodItems);
+        ItemsExpiringLastGUI = new ItemsExpiringLastGUI(foodItems);
     }
 
     /**
@@ -64,6 +66,7 @@ public class ExpiryDateTrackerGUI extends javax.swing.JFrame implements ExpiryDa
         itemsExpiringSoonButton.addActionListener(this::itemsExpiringSoonButtonActionPerformed);
 
         itemsExpiringLastButton.setText("What items expire last?");
+        itemsExpiringLastButton.addActionListener(this::itemsExpiringLastButtonActionPerformed);
 
         addMoreItemsButton.setText("Add more items");
 
@@ -112,6 +115,11 @@ public class ExpiryDateTrackerGUI extends javax.swing.JFrame implements ExpiryDa
         // TODO add your handling code here:
         ItemsExpiringSoonGUI.setVisible(true);
     }//GEN-LAST:event_itemsExpiringSoonButtonActionPerformed
+
+    private void itemsExpiringLastButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemsExpiringLastButtonActionPerformed
+        // TODO add your handling code here:
+        ItemsExpiringLastGUI.setVisible(true);
+    }//GEN-LAST:event_itemsExpiringLastButtonActionPerformed
 
     /**
      * @param args the command line arguments
