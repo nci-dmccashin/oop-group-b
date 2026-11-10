@@ -29,8 +29,7 @@ public class ExpiryDateTrackerManager implements ExpiryDateCommonInterface {
         this.foodItems = foodItems;
         this.expiryDateTrackerCalculator = new ExpiryDateTrackerCalculator(foodItems);
         expiryDateTrackerCalculator.calculateFoodExpiration();
-        this.expiryGUI = new ExpiryDateTrackerGUI();
-        expiryGUI.setFoodItems(foodItems);
+        this.expiryGUI = new ExpiryDateTrackerGUI(foodItems);
         expiryGUI.setVisible(true);
     }
     
