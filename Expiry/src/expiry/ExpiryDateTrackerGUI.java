@@ -5,6 +5,7 @@
 package expiry;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  *
@@ -16,6 +17,8 @@ public class ExpiryDateTrackerGUI extends javax.swing.JFrame implements ExpiryDa
     protected ItemsExpiringSoonGUI ItemsExpiringSoonGUI;
     protected ItemsExpiringLastGUI ItemsExpiringLastGUI;
     protected AddMoreGUI AddMoreGUI;
+    // Create ArrayList of JFrame's so I can loop over them and change the default close behavior of GUIs that are supposed to be overlays
+    protected ArrayList<javax.swing.JFrame> overlayGUIs = new ArrayList();
     protected ArrayList<FoodProduct> foodItems;
 
     @Override
@@ -35,8 +38,20 @@ public class ExpiryDateTrackerGUI extends javax.swing.JFrame implements ExpiryDa
         initComponents();
         this.foodItems = foodItems;
         this.ItemsExpiringSoonGUI = new ItemsExpiringSoonGUI(foodItems);
+        // Add GUI to ArrayList so I can loop through and change default close behavior per JFrame Docs
+        this.overlayGUIs.add(ItemsExpiringSoonGUI);
         this.ItemsExpiringLastGUI = new ItemsExpiringLastGUI(foodItems);
+        this.overlayGUIs.add(ItemsExpiringLastGUI);
         this.AddMoreGUI = new AddMoreGUI(foodItems);
+        this.overlayGUIs.add(AddMoreGUI);
+        
+        // Change default close behavior of GUIs
+        Iterator<javax.swing.JFrame> it = overlayGUIs.iterator();
+        while(it.hasNext()) {
+            javax.swing.JFrame gui = it.next();
+            // Change default close behavior to hide on close https://docs.oracle.com/javase/8/docs/api/javax/swing/WindowConstants.html
+            gui.setDefaultCloseOperation(HIDE_ON_CLOSE);
+        }
     }
 
     /**
