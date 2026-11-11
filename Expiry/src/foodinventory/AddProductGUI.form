@@ -44,7 +44,7 @@
                   </Group>
                   <Component id="categoryLBL" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="quantityLBL" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="expiryLBL" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="expirydLBL" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -69,7 +69,7 @@
               <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
               <Component id="quantityTF" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-              <Component id="expiryLBL" min="-2" max="-2" attributes="0"/>
+              <Component id="expirydLBL" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="expiryTF" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -98,7 +98,7 @@
         <Property name="text" type="java.lang.String" value="Quantity"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="expiryLBL">
+    <Component class="javax.swing.JLabel" name="expirydLBL">
       <Properties>
         <Property name="text" type="java.lang.String" value="Expiry Date"/>
       </Properties>

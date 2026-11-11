@@ -31,7 +31,7 @@ public class AddProductGUI extends javax.swing.JFrame {
         nameLBL = new javax.swing.JLabel();
         categoryLBL = new javax.swing.JLabel();
         quantityLBL = new javax.swing.JLabel();
-        expiryLBL = new javax.swing.JLabel();
+        expirydLBL = new javax.swing.JLabel();
         nameTF = new javax.swing.JTextField();
         categoryTF = new javax.swing.JTextField();
         quantityTF = new javax.swing.JTextField();
@@ -48,7 +48,7 @@ public class AddProductGUI extends javax.swing.JFrame {
 
         quantityLBL.setText("Quantity");
 
-        expiryLBL.setText("Expiry Date");
+        expirydLBL.setText("Expiry Date");
 
         saveBtn.setText("Save Product");
         saveBtn.addActionListener(this::saveBtnActionPerformed);
@@ -81,7 +81,7 @@ public class AddProductGUI extends javax.swing.JFrame {
                         .addComponent(addLBL))
                     .addComponent(categoryLBL)
                     .addComponent(quantityLBL)
-                    .addComponent(expiryLBL))
+                    .addComponent(expirydLBL))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -102,7 +102,7 @@ public class AddProductGUI extends javax.swing.JFrame {
                 .addGap(7, 7, 7)
                 .addComponent(quantityTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(expiryLBL)
+                .addComponent(expirydLBL)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(expiryTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -149,8 +149,8 @@ public class AddProductGUI extends javax.swing.JFrame {
     private javax.swing.JButton backBtn;
     private javax.swing.JLabel categoryLBL;
     private javax.swing.JTextField categoryTF;
-    private javax.swing.JLabel expiryLBL;
     private javax.swing.JTextField expiryTF;
+    private javax.swing.JLabel expirydLBL;
     private javax.swing.JLabel nameLBL;
     private javax.swing.JTextField nameTF;
     private javax.swing.JLabel quantityLBL;
