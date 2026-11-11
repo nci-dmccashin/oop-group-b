@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+import expiry.ExpiryApp;
 import expiry.ExpiryDateTrackerGUI;
 import expiry.FoodProduct;
 import foodinventory.InventoryGUI;
