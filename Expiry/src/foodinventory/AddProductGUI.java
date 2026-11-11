@@ -54,6 +54,7 @@ public class AddProductGUI extends javax.swing.JFrame {
         saveBtn.addActionListener(this::saveBtnActionPerformed);
 
         backBtn.setText("Back");
+        backBtn.addActionListener(this::backBtnActionPerformed);
 
         addLBL.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         addLBL.setText("Add Product");
@@ -118,6 +119,13 @@ public class AddProductGUI extends javax.swing.JFrame {
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_saveBtnActionPerformed
+
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        // TODO add your handling code here:
+        InventoryGUI myGUI = new InventoryGUI(); //back to Inventory
+        myGUI.setVisible(true);
+        this.dispose(); //close current JFrame
+    }//GEN-LAST:event_backBtnActionPerformed
 
     /**
      * @param args the command line arguments
