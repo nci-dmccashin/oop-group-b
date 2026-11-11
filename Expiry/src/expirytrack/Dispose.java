@@ -6,7 +6,7 @@
 package expirytrack;
 
 public class Dispose {
-    private String wasteType;
+    protected String wasteType;
     private String recommend;
 
     public Dispose() {
