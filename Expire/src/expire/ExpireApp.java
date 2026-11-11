@@ -2,20 +2,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package mainApp;
+package expire;
 
+import ExpiryTracker.ExpiryDateTrackerGUI;
+import ExpiryTracker.FoodProduct;
+import expirytrack.wasteGUI;
+import foodinventory.InventoryGUI;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-import expiry.ExpiryApp;
-import expiry.ExpiryDateTrackerGUI;
-import expiry.FoodProduct;
-import foodinventory.InventoryGUI;
-import expirytrack.wasteGUI;
-
-
-public class MainApp extends JFrame {
+public class ExpireApp extends JFrame {
     private JPanel pan;
     private JLabel titleLbl;
     private JButton inventoryBtn;
@@ -25,7 +22,7 @@ public class MainApp extends JFrame {
     // Shared food list for the expiry tracker
     private ArrayList<FoodProduct> foodItems = new ArrayList<>();
 
-    public MainApp() {
+    public ExpireApp() {
 
         setTitle("Food Management System");
         setSize(450, 350);
@@ -77,7 +74,7 @@ public class MainApp extends JFrame {
     public static void main(String[] args) {
 
         SwingUtilities.invokeLater(() -> {
-            MainApp app = new MainApp();
+            ExpireApp app = new ExpireApp();
             app.setVisible(true);
         });
     }
