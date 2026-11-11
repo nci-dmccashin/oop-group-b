@@ -11,7 +11,7 @@ import java.util.Iterator;
  *
  * @author danie
  */
-public class ExpiryApp {
+public class ExpiryTrackerApp {
 
     /**
      * @param args the command line arguments
