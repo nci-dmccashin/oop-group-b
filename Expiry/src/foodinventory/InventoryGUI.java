@@ -87,6 +87,9 @@ public class InventoryGUI extends javax.swing.JFrame {
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
         // TODO add your handling code here:
+         AddProductGUI myGUI = new AddProductGUI(); //go to add product JFrame
+        myGUI.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_addBtnActionPerformed
 
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
