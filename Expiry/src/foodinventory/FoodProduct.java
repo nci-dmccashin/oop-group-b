@@ -9,5 +9,9 @@ package foodinventory;
  * @author kri
  */
 public class FoodProduct {
+    private String name, category, expiryDate;
+    private int quantity;
+    
+    
     
 }
