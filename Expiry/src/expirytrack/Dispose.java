@@ -50,7 +50,7 @@ public class Dispose {
 
         return recommend;
     }
-
+   
     public String printDetails() {
         return "Waste Type: " + wasteType
                 + "\nRecommended Disposal: " + recommend;

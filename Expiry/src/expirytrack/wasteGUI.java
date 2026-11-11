@@ -150,10 +150,7 @@ public class wasteGUI extends JFrame{
         String item = "";
         String wasteType = "";
 
-    wasteReport report = new wasteReport(
-        wasteAmount, units, item, wasteType,
-        totalWaste, date.toString());
-   
+    wasteReport report = new wasteReport(wasteAmount, units, item, wasteType, totalWaste, date.toString());
 
     JOptionPane.showMessageDialog(this, report.printDetails());
     }
