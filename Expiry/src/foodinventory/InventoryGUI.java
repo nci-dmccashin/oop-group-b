@@ -31,7 +31,7 @@ public class InventoryGUI extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         inventoryLBL = new javax.swing.JLabel();
         addBtn = new javax.swing.JButton();
-        backtomenuBtn = new javax.swing.JButton();
+        backBtn = new javax.swing.JButton();
         searchBtn = new javax.swing.JButton();
 
         jLabel1.setText("jLabel1");
@@ -43,7 +43,7 @@ public class InventoryGUI extends javax.swing.JFrame {
         addBtn.setText("Add");
         addBtn.addActionListener(this::addBtnActionPerformed);
 
-        backtomenuBtn.setText("Back to Main Menu");
+        backBtn.setText("Back to Main Menu");
 
         searchBtn.setText("Search");
         searchBtn.addActionListener(this::searchBtnActionPerformed);
@@ -65,7 +65,7 @@ public class InventoryGUI extends javax.swing.JFrame {
                         .addComponent(inventoryLBL))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(124, 124, 124)
-                        .addComponent(backtomenuBtn)))
+                        .addComponent(backBtn)))
                 .addContainerGap(133, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -78,7 +78,7 @@ public class InventoryGUI extends javax.swing.JFrame {
                     .addComponent(addBtn)
                     .addComponent(searchBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
-                .addComponent(backtomenuBtn)
+                .addComponent(backBtn)
                 .addGap(66, 66, 66))
         );
 
@@ -120,7 +120,7 @@ public class InventoryGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBtn;
-    private javax.swing.JButton backtomenuBtn;
+    private javax.swing.JButton backBtn;
     private javax.swing.JLabel inventoryLBL;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton searchBtn;
