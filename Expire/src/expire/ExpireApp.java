@@ -4,7 +4,7 @@
  */
 package expire;
 
-import ExpiryTracker.ExpiryDateTrackerGUI;
+import ExpiryTracker.ExpiryTrackerApp;
 import ExpiryTracker.FoodProduct;
 import expirytrack.wasteGUI;
 import foodinventory.InventoryGUI;
@@ -53,8 +53,8 @@ public class ExpireApp extends JFrame {
 
         // Open Expiry Date Tracker
         expiryBtn.addActionListener(e -> {
-            ExpiryDateTrackerGUI expiry = new ExpiryDateTrackerGUI(foodItems);
-            expiry.setVisible(true);
+            ExpiryTrackerApp expiryTrackerApp = new ExpiryTrackerApp();
+            expiryTrackerApp.setVisible(true);
         });
 
         // Open Waste Management
