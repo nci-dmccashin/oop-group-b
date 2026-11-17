@@ -18,6 +18,14 @@ public abstract class ExpiryTrackerCommonGUI extends javax.swing.JFrame {
     public ExpiryTrackerCommonGUI(ArrayList<FoodProduct> foodItems) {
         this.foodItems = foodItems;
     }
+
+    public ArrayList<FoodProduct> getFoodItems() {
+        return foodItems;
+    }
+
+    public void setFoodItems(ArrayList<FoodProduct> foodItems) {
+        this.foodItems = foodItems;
+    }
     
     // Create refresh method for all GUIs
     public void refresh() {
