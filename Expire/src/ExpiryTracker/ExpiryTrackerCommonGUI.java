@@ -27,6 +27,6 @@ public abstract class ExpiryTrackerCommonGUI extends javax.swing.JFrame {
     }
     
     // Create blank refresh method for all GUIs
-    public void refresh() {
+    protected void refresh() {
     }
 }

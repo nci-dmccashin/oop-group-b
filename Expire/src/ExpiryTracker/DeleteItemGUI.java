@@ -5,6 +5,8 @@
 package ExpiryTracker;
 
 import java.util.ArrayList;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,7 +22,10 @@ public class DeleteItemGUI extends ExpiryTrackerCommonGUI {
     public DeleteItemGUI(ArrayList<FoodProduct> foodItems) {
         super(foodItems);
         initComponents();
-        
+        loadListData();
+    }
+    
+    private void loadListData() {
         // Loop over FoodItems and add them to list
         // Create array of strings for text in list
         String[] listItemData = new String[foodItems.size()];
@@ -28,6 +33,11 @@ public class DeleteItemGUI extends ExpiryTrackerCommonGUI {
             listItemData[i] = foodItems.get(i).getName();
         }
         itemsList.setListData(listItemData);
+    }
+    
+    @Override
+    protected void refresh() {
+        loadListData();
     }
 
     /**
@@ -43,6 +53,7 @@ public class DeleteItemGUI extends ExpiryTrackerCommonGUI {
         jScrollPane1 = new javax.swing.JScrollPane();
         itemsList = new javax.swing.JList<>();
         deleteButton = new javax.swing.JButton();
+        refreshButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,6 +68,10 @@ public class DeleteItemGUI extends ExpiryTrackerCommonGUI {
         jScrollPane1.setViewportView(itemsList);
 
         deleteButton.setText("Delete");
+        deleteButton.addActionListener(this::deleteButtonActionPerformed);
+
+        refreshButton.setText("Refresh");
+        refreshButton.addActionListener(this::refreshButtonActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -68,7 +83,10 @@ public class DeleteItemGUI extends ExpiryTrackerCommonGUI {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(titleTL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane1))
-                    .addComponent(deleteButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(deleteButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(refreshButton)))
                 .addContainerGap(222, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -79,12 +97,28 @@ public class DeleteItemGUI extends ExpiryTrackerCommonGUI {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(deleteButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(deleteButton)
+                    .addComponent(refreshButton))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+        // TODO add your handling code here:
+        int itemSelectedIndx = itemsList.getSelectedIndex();
+        // Delete selected index from foodItems
+        FoodProduct removedItem = foodItems.remove(itemSelectedIndx);
+        JOptionPane.showMessageDialog(null, String.format("Item %s (You had %s) has been removed", removedItem.getName(), removedItem.getQuantity()));
+        refresh();
+    }//GEN-LAST:event_deleteButtonActionPerformed
+
+    private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
+        // TODO add your handling code here:
+        refresh();
+    }//GEN-LAST:event_refreshButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -115,6 +149,7 @@ public class DeleteItemGUI extends ExpiryTrackerCommonGUI {
     private javax.swing.JButton deleteButton;
     private javax.swing.JList<String> itemsList;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton refreshButton;
     private javax.swing.JLabel titleTL;
     // End of variables declaration//GEN-END:variables
 }
