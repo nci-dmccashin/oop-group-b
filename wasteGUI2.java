@@ -3,9 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package expirytrack;
-
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  *
@@ -157,7 +160,8 @@ public class wasteGUI2 extends javax.swing.JFrame {
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
         // TODO add your handling code here:
-        //get text from texfields
+        //get text from texfield
+        
         units = unitsTf.getText();
         item = itemTf.getText();
         wasteType = wasteTypeTf.getText();
@@ -170,12 +174,27 @@ public class wasteGUI2 extends javax.swing.JFrame {
         
          //add object to array list
          wasteList.add(record);
+         //save record to file
+         try{
+             File outFile = new File("wasteRecord.txt");
+             FileWriter fw = new FileWriter(outFile);
+             BufferedWriter bw = new BufferedWriter(fw);
+             
+             bw.write(amount + " ," + units +" ," +item +" ,"+wasteType );
+             bw.newLine();
+             bw.close();
+             
+             JOptionPane.showMessageDialog(null, "record saved successfully");
+         } catch(IOException e){
+             JOptionPane.showMessageDialog(null, "error: ");
+         }
         
     }//GEN-LAST:event_saveBtnActionPerformed
 
     private void disposeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disposeBtnActionPerformed
         // TODO add your handling code here:
-        wasteType = wasteType.getText();
+        wasteType = wasteTypeTf.getText();
+        
         Dispose dsp = new Dispose();
         dsp.setWasteType(wasteType);
         JOptionPane.showMessageDialog(null, dsp.getRecommend());
@@ -236,7 +255,7 @@ public class wasteGUI2 extends javax.swing.JFrame {
         + "Can: " + canTotal + "\n"
         + "Oil: " + oilTotal
     );
-    }
+    
     }//GEN-LAST:event_endBtnActionPerformed
 
     private void amountTfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_amountTfActionPerformed
