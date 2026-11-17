@@ -17,8 +17,9 @@ public class ExpiryTrackerApp {
      * @param args the command line arguments
      */
     // Temporary: food products array list until inventory manager is implemented
-    protected static ArrayList<FoodProduct> foodProducts = new ArrayList();
-    public static void main(String[] args) {
+    protected ArrayList<FoodProduct> foodProducts = new ArrayList();
+    protected ExpiryDateTrackerManager edtm;
+    public ExpiryTrackerApp() {
         // TODO code application logic here
         // Temporary: Create 6 food items
         for (int i = 0; i <= 3; i++) {
@@ -26,7 +27,11 @@ public class ExpiryTrackerApp {
            foodProducts.add(new FoodProduct("Bread", "baked", 1, "15 11 2026"));
         }
         
-        ExpiryDateTrackerManager edtm = new ExpiryDateTrackerManager(foodProducts);
+        this.edtm = new ExpiryDateTrackerManager(foodProducts);
     }
     
+    // Pass along setVisible method to correct GUI
+    public void setVisible(boolean isVisible) {
+        edtm.expiryGUI.setVisible(isVisible);
+    }
 }
