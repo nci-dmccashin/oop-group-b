@@ -109,9 +109,14 @@ public class ItemsExpiringLastGUI extends ExpiryTrackerCommonGUI {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    @Override
+    public void refresh() {
+        displayFoodItems();
+    }
+    
     private void refreshBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshBtnActionPerformed
         // TODO add your handling code here:
-        displayFoodItems();
+        refresh();
     }//GEN-LAST:event_refreshBtnActionPerformed
 
     /**

@@ -5,7 +5,6 @@
 package ExpiryTracker;
 
 import java.util.ArrayList;
-import javax.swing.SwingUtilities;
 
 /**
  *
@@ -27,9 +26,7 @@ public abstract class ExpiryTrackerCommonGUI extends javax.swing.JFrame {
         this.foodItems = foodItems;
     }
     
-    // Create refresh method for all GUIs
+    // Create blank refresh method for all GUIs
     public void refresh() {
-        // Use updateComponentTreeUI to refresh all elements
-        SwingUtilities.updateComponentTreeUI(this);
     }
 }
