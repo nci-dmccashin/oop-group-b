@@ -11,7 +11,7 @@ import java.util.Iterator;
  *
  * @author danie
  */
-public class ExpiryDateTrackerGUI extends javax.swing.JFrame implements ExpiryDateCommonInterface {
+public class ExpiryDateTrackerGUI extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ExpiryDateTrackerGUI.class.getName());
     protected ItemsExpiringSoonGUI ItemsExpiringSoonGUI;
@@ -21,16 +21,6 @@ public class ExpiryDateTrackerGUI extends javax.swing.JFrame implements ExpiryDa
     // Create ArrayList of JFrame's so I can loop over them and change the default close behavior of GUIs that are supposed to be overlays
     protected ArrayList<javax.swing.JFrame> overlayGUIs = new ArrayList();
     protected ArrayList<FoodProduct> foodItems;
-
-    @Override
-    public ArrayList<FoodProduct> getFoodItems() {
-        return foodItems;
-    }
-
-    @Override
-    public void setFoodItems(ArrayList<FoodProduct> foodItems) {
-        this.foodItems = foodItems;
-    }
     
     /**
      * Creates new form ExpiryDateTrackerGUI

@@ -10,20 +10,10 @@ import java.util.ArrayList;
  *
  * @author danie
  */
-public class ExpiryDateTrackerManager implements ExpiryDateCommonInterface {
+public class ExpiryDateTrackerManager {
     protected ArrayList<FoodProduct> foodItems;
     protected ExpiryDateTrackerCalculator expiryDateTrackerCalculator;
     protected ExpiryDateTrackerGUI expiryGUI;
-
-    @Override
-    public ArrayList<FoodProduct> getFoodItems() {
-        return foodItems;
-    }
-
-    @Override
-    public void setFoodItems(ArrayList<FoodProduct> foodItems) {
-        this.foodItems = foodItems;
-    }
 
     public ExpiryDateTrackerManager(ArrayList<FoodProduct> foodItems) {
         this.foodItems = foodItems;

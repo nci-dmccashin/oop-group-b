@@ -10,18 +10,17 @@ import java.util.ArrayList;
  *
  * @author danie
  */
-public class AddMoreGUI extends javax.swing.JFrame {
+public class AddMoreGUI extends ExpiryTrackerCommonGUI {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AddMoreGUI.class.getName());
-    protected ArrayList<FoodProduct> foodItems;
     
     
     /**
      * Creates new form AddMoreGUI
      */
     public AddMoreGUI(ArrayList<FoodProduct> foodItems) {
+        super(foodItems);
         initComponents();
-        this.foodItems = foodItems;
         previewTA.setVisible(false);
     }
 

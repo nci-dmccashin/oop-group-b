@@ -11,17 +11,16 @@ import java.util.Iterator;
  *
  * @author danie
  */
-public class ItemsExpiringSoonGUI extends javax.swing.JFrame implements ExpiryDateCommonInterface {
+public class ItemsExpiringSoonGUI extends ExpiryTrackerCommonGUI {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ItemsExpiringSoonGUI.class.getName());
-    protected ArrayList<FoodProduct> foodItems;
     
     /**
      * Creates new form itemsExpiringSoonGUI
      */
     public ItemsExpiringSoonGUI(ArrayList<FoodProduct> foodItems) {
+        super(foodItems);
         initComponents();
-        this.foodItems = foodItems;
         displayFoodItems();
     }
     
@@ -36,16 +35,6 @@ public class ItemsExpiringSoonGUI extends javax.swing.JFrame implements ExpiryDa
             output.append("\n");
         }
         resultsTA.setText(output.toString());
-    }
-
-    @Override
-    public ArrayList<FoodProduct> getFoodItems() {
-        return foodItems;
-    }
-
-    @Override
-    public void setFoodItems(ArrayList<FoodProduct> foodItems) {
-        this.foodItems = foodItems;
     }
 
     /**

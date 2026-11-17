@@ -18,7 +18,7 @@ import java.util.Iterator;
  *
  * @author danie
  */
-public class ExpiryDateTrackerCalculator implements ExpiryDateCommonInterface {
+public class ExpiryDateTrackerCalculator {
     // ArrayList isn't instatianted as ArrayList should be passed from parent class
     protected ArrayList<FoodProduct> foodItems;
     // ArrayList is instatiated as it is created in this class
@@ -27,16 +27,6 @@ public class ExpiryDateTrackerCalculator implements ExpiryDateCommonInterface {
     
     // HashMap of food items in days remaining (days remaining, FoodProduct)
     protected HashMap<Integer, FoodProduct> foodItemsDaysRemaining = new HashMap();
-
-    @Override
-    public ArrayList<FoodProduct> getFoodItems() {
-        return foodItems;
-    }
-
-    @Override
-    public void setFoodItems(ArrayList<FoodProduct> foodItems) {
-        this.foodItems = foodItems;
-    }
 
     public ArrayList<FoodProduct> getExpiringSoonFoodItems() {
         return expiringSoonFoodItems;

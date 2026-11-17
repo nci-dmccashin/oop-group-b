@@ -11,15 +11,15 @@ import java.util.Iterator;
  *
  * @author danie
  */
-public class ItemsExpiringLastGUI extends javax.swing.JFrame {
+public class ItemsExpiringLastGUI extends ExpiryTrackerCommonGUI {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ItemsExpiringLastGUI.class.getName());
-    protected ArrayList<FoodProduct> foodItems;
 
     /**
      * Creates new form ItemsExpiringLastGUI
      */
     public ItemsExpiringLastGUI(ArrayList<FoodProduct> foodItems) {
+        super(foodItems);
         initComponents();
         this.foodItems = foodItems;
         displayFoodItems();

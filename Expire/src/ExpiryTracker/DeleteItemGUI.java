@@ -10,7 +10,7 @@ import java.util.ArrayList;
  *
  * @author danie
  */
-public class DeleteItemGUI extends javax.swing.JFrame {
+public class DeleteItemGUI extends ExpiryTrackerCommonGUI {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(DeleteItemGUI.class.getName());
 
@@ -18,6 +18,7 @@ public class DeleteItemGUI extends javax.swing.JFrame {
      * Creates new form DeleteItemGUI
      */
     public DeleteItemGUI(ArrayList<FoodProduct> foodItems) {
+        super(foodItems);
         initComponents();
         
         // Loop over FoodItems and add them to list
