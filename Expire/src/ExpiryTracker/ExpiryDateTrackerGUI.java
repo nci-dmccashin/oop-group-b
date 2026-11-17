@@ -17,6 +17,7 @@ public class ExpiryDateTrackerGUI extends javax.swing.JFrame implements ExpiryDa
     protected ItemsExpiringSoonGUI ItemsExpiringSoonGUI;
     protected ItemsExpiringLastGUI ItemsExpiringLastGUI;
     protected AddMoreGUI AddMoreGUI;
+    protected DeleteItemGUI DeleteItemGUI;
     // Create ArrayList of JFrame's so I can loop over them and change the default close behavior of GUIs that are supposed to be overlays
     protected ArrayList<javax.swing.JFrame> overlayGUIs = new ArrayList();
     protected ArrayList<FoodProduct> foodItems;
@@ -44,6 +45,8 @@ public class ExpiryDateTrackerGUI extends javax.swing.JFrame implements ExpiryDa
         this.overlayGUIs.add(ItemsExpiringLastGUI);
         this.AddMoreGUI = new AddMoreGUI(foodItems);
         this.overlayGUIs.add(AddMoreGUI);
+        this.DeleteItemGUI = new DeleteItemGUI(foodItems);
+        this.overlayGUIs.add(DeleteItemGUI);
         
         // Change default close behavior of GUIs
         Iterator<javax.swing.JFrame> it = overlayGUIs.iterator();
@@ -69,6 +72,7 @@ public class ExpiryDateTrackerGUI extends javax.swing.JFrame implements ExpiryDa
         itemsExpiringSoonButton = new javax.swing.JButton();
         itemsExpiringLastButton = new javax.swing.JButton();
         addMoreItemsButton = new javax.swing.JButton();
+        deleteButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -88,6 +92,9 @@ public class ExpiryDateTrackerGUI extends javax.swing.JFrame implements ExpiryDa
         addMoreItemsButton.setText("Add more items");
         addMoreItemsButton.addActionListener(this::addMoreItemsButtonActionPerformed);
 
+        deleteButton.setText("Delete Item");
+        deleteButton.addActionListener(this::deleteButtonActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -105,7 +112,8 @@ public class ExpiryDateTrackerGUI extends javax.swing.JFrame implements ExpiryDa
                             .addComponent(itemsExpiringSoonButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(subtitleTF)
                             .addComponent(itemsExpiringLastButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(addMoreItemsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(addMoreItemsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -123,7 +131,9 @@ public class ExpiryDateTrackerGUI extends javax.swing.JFrame implements ExpiryDa
                 .addComponent(itemsExpiringLastButton)
                 .addGap(31, 31, 31)
                 .addComponent(addMoreItemsButton)
-                .addContainerGap(128, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(deleteButton)
+                .addContainerGap(99, Short.MAX_VALUE))
         );
 
         pack();
@@ -143,6 +153,11 @@ public class ExpiryDateTrackerGUI extends javax.swing.JFrame implements ExpiryDa
         // TODO add your handling code here:
         AddMoreGUI.setVisible(true);
     }//GEN-LAST:event_addMoreItemsButtonActionPerformed
+
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+        // TODO add your handling code here:
+        DeleteItemGUI.setVisible(true);
+    }//GEN-LAST:event_deleteButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -171,6 +186,7 @@ public class ExpiryDateTrackerGUI extends javax.swing.JFrame implements ExpiryDa
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addMoreItemsButton;
+    private javax.swing.JButton deleteButton;
     private javax.swing.JButton itemsExpiringLastButton;
     private javax.swing.JButton itemsExpiringSoonButton;
     private javax.swing.JLabel statsTF;
