@@ -4,6 +4,7 @@
  */
 package ExpiryTracker;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -44,7 +45,10 @@ public class ExpiryDateTrackerGUI extends javax.swing.JFrame {
             javax.swing.JFrame gui = it.next();
             // Change default close behavior to hide on close https://docs.oracle.com/javase/8/docs/api/javax/swing/WindowConstants.html
             gui.setDefaultCloseOperation(HIDE_ON_CLOSE);
+            // Change background colour to yellow
+            gui.getContentPane().setBackground(Color.YELLOW);
         }
+        this.getContentPane().setBackground(Color.YELLOW);
     }
 
     /**
