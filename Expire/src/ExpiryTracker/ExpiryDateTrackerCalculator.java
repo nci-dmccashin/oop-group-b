@@ -26,7 +26,11 @@ public class ExpiryDateTrackerCalculator {
     protected ArrayList<FoodProduct> expiringLongFoodItems = new ArrayList();
     
     // HashMap of food items in days remaining (days remaining, FoodProduct)
-    protected HashMap<Integer, FoodProduct> foodItemsDaysRemaining = new HashMap();
+    protected ArrayList<FoodProductRemainingDays> foodItemsDaysRemaining = new ArrayList();
+
+    public ArrayList<FoodProductRemainingDays> getFoodItemsDaysRemaining() {
+        return foodItemsDaysRemaining;
+    }
 
     public ArrayList<FoodProduct> getExpiringSoonFoodItems() {
         return expiringSoonFoodItems;
@@ -62,7 +66,18 @@ public class ExpiryDateTrackerCalculator {
             // Get days left
             var timeLeft  = Duration.between(LocalDateTime.now(), expiryDateFormatted).toDays();
             // Conver timeLeft (long) to int and insert into HashMap
-            foodItemsDaysRemaining.put(Math.toIntExact(timeLeft), foodItem);
+            foodItemsDaysRemaining.add(new FoodProductRemainingDays(Math.toIntExact(timeLeft), foodItem));
+            
+            // Sort array list with lambda function to compare days remaining
+            foodItemsDaysRemaining.sort((a, b) -> {
+                // Use lambda function to compare a, b. Sort array in order of which items are expiring sooner
+                if (a.daysRemaining < b.daysRemaining) {
+                    return -1;
+                } else {
+                    return 1;
+                }
+            });
+            System.out.println(foodItemsDaysRemaining.toString());
         }
     }
 }

@@ -5,7 +5,7 @@
 package ExpiryTracker;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.HashMap;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -32,8 +32,14 @@ public class ItemsExpiringSoonGUI extends ExpiryTrackerCommonGUI {
         StringBuffer output = new StringBuffer();
         // Create new TableModel
         DefaultTableModel tableModel = new DefaultTableModel(new String[] {"Name", "Category", "Expiration Date", "Quantity"}, foodItems.size());
-        for (int i = 0; i < foodItems.size(); i++) {
-            FoodProduct foodItem = foodItems.get(i);
+        // Use ExpiryDateTrackerCalculator to get food items in sorted hashmap
+        ExpiryDateTrackerCalculator expiryDateCalc = new ExpiryDateTrackerCalculator(foodItems);
+        expiryDateCalc.calculateFoodExpiration();
+        
+        // Get hashmap of sorted food items
+        ArrayList<FoodProductRemainingDays> foodItemsDaysRemaining = expiryDateCalc.getFoodItemsDaysRemaining();
+        for (int i = 0; i < foodItemsDaysRemaining.size(); i++) {
+            FoodProduct foodItem = foodItemsDaysRemaining.get(i).foodItem;
             // Set rows with correct data
             tableModel.setValueAt(foodItem.getName(), i, 0);
             tableModel.setValueAt(foodItem.getCategory(), i, 1);
