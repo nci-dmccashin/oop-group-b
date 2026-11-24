@@ -35,5 +35,8 @@ public class InventoryManager {
         return details;
     }
     
+    public ArrayList<FoodProduct> getProducts(){
+    return products;
+}
     
  }
