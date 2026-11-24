@@ -23,5 +23,17 @@ public class InventoryManager {
     
     public void addProduct(FoodProduct product){
         products.add(product);
+        products.add(product); //add product to arraylist
     }
 }
+    public String displayProducts(){
+        String details=" ";
+        for (int i=0; i<products.size(); i++ ){ //loop through products
+            FoodProduct temp= products.get(i);
+            details = details+temp.printDetails()+ "/n";
+        }
+        return details;
+    }
+    
+    
+ }
