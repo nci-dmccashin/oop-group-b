@@ -39,4 +39,14 @@ public class InventoryManager {
     return products;
 }
     
+    public FoodProduct searchProduct(String name){ //method to search for product
+        for(int i=0;i<products.size(); i++){ // loop through products list
+            FoodProduct temp= products.get(i);
+            
+            if(temp.getName().equals(name)){
+                return temp;
+            }
+        }
+        return null;
+    }
  }
