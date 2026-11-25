@@ -49,4 +49,15 @@ public class InventoryManager {
         }
         return null;
     }
+    
+    public void deleteProduct(String name){
+        for(int i=0; i<products.size();i++){
+            FoodProduct product= products.get(i);
+            
+            if(product.getName().equals(name)){
+                products.remove(i);
+                return;
+            }
+        }
+    }
  }
