@@ -4,6 +4,7 @@
  */
 package ExpiryTracker;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.table.DefaultTableModel;
@@ -16,37 +17,20 @@ public class ItemsExpiringSoonGUI extends ExpiryTrackerCommonGUI {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ItemsExpiringSoonGUI.class.getName());
     
+    protected ItemsTable itemsTable;
+    
     /**
      * Creates new form itemsExpiringSoonGUI
      */
     public ItemsExpiringSoonGUI(ArrayList<FoodProduct> foodItems) {
         super(foodItems);
         initComponents();
-        displayFoodItems();
-    }
-    
-    private void displayFoodItems() {
-        // Make seperate function as refresh is required if ArrayList changes
-        
-        // Loop over food items and output
-        StringBuffer output = new StringBuffer();
-        // Create new TableModel
-        DefaultTableModel tableModel = new DefaultTableModel(new String[] {"Name", "Category", "Expiration Date", "Quantity"}, foodItems.size());
-        // Use ExpiryDateTrackerCalculator to get food items in sorted hashmap
-        ExpiryDateTrackerCalculator expiryDateCalc = new ExpiryDateTrackerCalculator(foodItems);
-        expiryDateCalc.calculateFoodExpiration();
-        
-        // Get hashmap of sorted food items
-        ArrayList<FoodProductRemainingDays> foodItemsDaysRemaining = expiryDateCalc.getFoodItemsDaysRemaining();
-        for (int i = 0; i < foodItemsDaysRemaining.size(); i++) {
-            FoodProduct foodItem = foodItemsDaysRemaining.get(i).foodItem;
-            // Set rows with correct data
-            tableModel.setValueAt(foodItem.getName(), i, 0);
-            tableModel.setValueAt(foodItem.getCategory(), i, 1);
-            tableModel.setValueAt(foodItem.getExpiryDate(), i ,2);
-            tableModel.setValueAt(foodItem.getQuantity(), i , 3);
-        }
-        resultsTable.setModel(tableModel);
+        this.itemsTable = new ItemsTable(foodItems);
+        itemsTable.setVisible(true);
+        // Set itemsTable to be the same demensions of the panel it is being added to
+        itemsTable.setSize(tablePanel.getWidth(), tablePanel.getHeight());
+        // Add ItemsTable to panel
+        tablePanel.add(itemsTable);
     }
 
     /**
@@ -62,8 +46,7 @@ public class ItemsExpiringSoonGUI extends ExpiryTrackerCommonGUI {
         subtitleTL = new javax.swing.JLabel();
         noOfExpiringItemsTL = new javax.swing.JLabel();
         refreshBtn = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        resultsTable = new javax.swing.JTable();
+        tablePanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -77,30 +60,16 @@ public class ItemsExpiringSoonGUI extends ExpiryTrackerCommonGUI {
         refreshBtn.setText("Refresh");
         refreshBtn.addActionListener(this::refreshBtnActionPerformed);
 
-        resultsTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null}
-            },
-            new String [] {
-                "Name", "Type", "Expiration Date", "Quantity"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane2.setViewportView(resultsTable);
+        javax.swing.GroupLayout tablePanelLayout = new javax.swing.GroupLayout(tablePanel);
+        tablePanel.setLayout(tablePanelLayout);
+        tablePanelLayout.setHorizontalGroup(
+            tablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 369, Short.MAX_VALUE)
+        );
+        tablePanelLayout.setVerticalGroup(
+            tablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -108,8 +77,8 @@ public class ItemsExpiringSoonGUI extends ExpiryTrackerCommonGUI {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(titleTL)
                     .addComponent(subtitleTL)
@@ -122,7 +91,7 @@ public class ItemsExpiringSoonGUI extends ExpiryTrackerCommonGUI {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tablePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(titleTL)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -130,8 +99,9 @@ public class ItemsExpiringSoonGUI extends ExpiryTrackerCommonGUI {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(noOfExpiringItemsTL)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(refreshBtn)))
-                .addContainerGap(19, Short.MAX_VALUE))
+                        .addComponent(refreshBtn)
+                        .addGap(0, 177, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         pack();
@@ -139,7 +109,6 @@ public class ItemsExpiringSoonGUI extends ExpiryTrackerCommonGUI {
 
     @Override
     public void refresh() {
-        displayFoodItems();
     }
     
     private void refreshBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshBtnActionPerformed
@@ -173,11 +142,10 @@ public class ItemsExpiringSoonGUI extends ExpiryTrackerCommonGUI {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel noOfExpiringItemsTL;
     private javax.swing.JButton refreshBtn;
-    private javax.swing.JTable resultsTable;
     private javax.swing.JLabel subtitleTL;
+    private javax.swing.JPanel tablePanel;
     private javax.swing.JLabel titleTL;
     // End of variables declaration//GEN-END:variables
 }
