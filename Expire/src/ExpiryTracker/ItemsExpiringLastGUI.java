@@ -5,7 +5,6 @@
 package ExpiryTracker;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  *
@@ -32,6 +31,19 @@ public class ItemsExpiringLastGUI extends ExpiryTrackerCommonGUI {
         this.itemsTable = new ItemsTable(foodItems);
         itemsTable.setSize(tablePanel.getWidth(), tablePanel.getHeight());
         tablePanel.add(itemsTable);
+        populateStats();
+    }
+    
+    // Create method to populate stats
+    private void populateStats() {
+        // Calculate number of items not expiring for 7 days or more
+        ExpiryDateTrackerCalculator calculator = new ExpiryDateTrackerCalculator(foodItems);
+        calculator.calculateFoodExpiration();
+        ArrayList<FoodProductRemainingDays> foodItemsWDaysRemaining = calculator.getFoodItemsDaysRemaining();
+        
+        // Use removeIf to remove items that expire in less than 7 days from the ArrayList https://www.w3schools.com/java/ref_arraylist_removeif.asp
+        foodItemsWDaysRemaining.removeIf(a -> a.daysRemaining < 7);
+        itemsNotExpiring7DaysTL.setText(String.format("No. of items not expiring for 7 days: %d", foodItemsWDaysRemaining.size()));
     }
 
     /**
@@ -116,6 +128,7 @@ public class ItemsExpiringLastGUI extends ExpiryTrackerCommonGUI {
     @Override
     public void refresh() {
         itemsTable.refresh();
+        populateStats();
     }
     
     private void refreshBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshBtnActionPerformed

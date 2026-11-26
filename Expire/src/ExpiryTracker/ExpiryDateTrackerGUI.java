@@ -49,6 +49,9 @@ public class ExpiryDateTrackerGUI extends javax.swing.JFrame {
             gui.getContentPane().setBackground(Color.YELLOW);
         }
         this.getContentPane().setBackground(Color.YELLOW);
+        
+        // Add number to statsTF
+        statsTF.setText(String.format("There are %d numbers of items being tracked", foodItems.size()));
     }
 
     /**

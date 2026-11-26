@@ -31,6 +31,7 @@ public class ItemsExpiringSoonGUI extends ExpiryTrackerCommonGUI {
         itemsTable.setSize(tablePanel.getWidth(), tablePanel.getHeight());
         // Add ItemsTable to panel
         tablePanel.add(itemsTable);
+        populateStats();
     }
 
     /**
@@ -110,6 +111,21 @@ public class ItemsExpiringSoonGUI extends ExpiryTrackerCommonGUI {
     @Override
     public void refresh() {
         itemsTable.refresh();
+        populateStats();
+    }
+    
+    public void populateStats() {
+        // Calculate number of items not expiring for 7 days or more
+        ExpiryDateTrackerCalculator calculator = new ExpiryDateTrackerCalculator(foodItems);
+        calculator.calculateFoodExpiration();
+        ArrayList<FoodProductRemainingDays> foodItemsWDaysRemaining = calculator.getFoodItemsDaysRemaining();
+        
+        // Use removeIf to remove items that expire in less than 7 days from the ArrayList https://www.w3schools.com/java/ref_arraylist_removeif.asp
+        foodItemsWDaysRemaining.removeIf(a -> a.daysRemaining > 3);
+        // Also check if items are expired as they are not expiring, they have already expired
+        foodItemsWDaysRemaining.removeIf(a -> a.daysRemaining < 1);
+        noOfExpiringItemsTL.setText(String.format("No. of items expiring in the next 3 days: %d", foodItemsWDaysRemaining.size()));
+
     }
     
     private void refreshBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshBtnActionPerformed
