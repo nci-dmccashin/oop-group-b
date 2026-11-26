@@ -50,6 +50,10 @@ public class ItemsTable extends javax.swing.JPanel {
     public void refresh() {
         displayFoodItems();
     }
+    
+    public int getSelectedRow() {
+        return resultsTable.getSelectedRow();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
