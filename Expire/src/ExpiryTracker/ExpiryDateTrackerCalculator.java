@@ -77,7 +77,6 @@ public class ExpiryDateTrackerCalculator {
                     return 1;
                 }
             });
-            System.out.println(foodItemsDaysRemaining.toString());
         }
     }
 }
