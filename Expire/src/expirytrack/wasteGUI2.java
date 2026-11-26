@@ -3,9 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package expirytrack;
-
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.File;
+import java.io.FileReader;
+import java.io.BufferedReader;
+
 
 /**
  *
@@ -13,7 +19,7 @@ import javax.swing.JOptionPane;
  */
 public class wasteGUI2 extends javax.swing.JFrame {
     private ArrayList<wasteRecord> wasteList = new ArrayList<>();
-    private String units, item, wasteType;
+    private String units, item, type;
     private double amount;
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(wasteGUI2.class.getName());
@@ -26,7 +32,6 @@ public class wasteGUI2 extends javax.swing.JFrame {
         wasteList = new ArrayList<>();
         units = new String();
         item = new String();
-        wasteType = new String();
         amount = 0;
     }
 
@@ -40,16 +45,16 @@ public class wasteGUI2 extends javax.swing.JFrame {
     private void initComponents() {
 
         saveBtn = new javax.swing.JButton();
-        disposeBtn = new javax.swing.JButton();
         endBtn = new javax.swing.JButton();
+        clearHistoryBtn = new javax.swing.JButton();
         Title = new javax.swing.JLabel();
         amountLbl = new javax.swing.JLabel();
         unitsLbl = new javax.swing.JLabel();
         itemLbl = new javax.swing.JLabel();
-        wasteTypeLbl = new javax.swing.JLabel();
         amountTf = new javax.swing.JTextField();
         unitsTf = new javax.swing.JTextField();
         itemTf = new javax.swing.JTextField();
+        wasteTypeLbl = new javax.swing.JLabel();
         wasteTypeTf = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -58,11 +63,11 @@ public class wasteGUI2 extends javax.swing.JFrame {
         saveBtn.setText("save/next record");
         saveBtn.addActionListener(this::saveBtnActionPerformed);
 
-        disposeBtn.setText("show disposal method");
-        disposeBtn.addActionListener(this::disposeBtnActionPerformed);
-
         endBtn.setText("go to end");
         endBtn.addActionListener(this::endBtnActionPerformed);
+        
+        clearHistoryBtn.setText("clear history");
+        clearHistoryBtn.addActionListener(this::clearHistoryBtnActionPerformed);
 
         Title.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         Title.setText("Waste Record");
@@ -70,11 +75,15 @@ public class wasteGUI2 extends javax.swing.JFrame {
         amountLbl.setText("Enter amount wasted for a product");
         amountLbl.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 102, 0)));
 
-        unitsLbl.setText("Enter units: L for litres, kg for kilos, g for grams");
+        unitsLbl.setText("Enter units: L for litres, kg for kilos");
+        unitsLbl.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 102, 0)));
 
         itemLbl.setText("Enter product wasted");
-
-        wasteTypeLbl.setText("<html>Enter waste type (liquid, plastic,<br> cartoon, paper, can, food, general, oil)</html>");
+        itemLbl.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 102, 0)));
+        
+        wasteTypeLbl.setText("<html>Enter waste type<br>(liquid, plastic, carton, paper, can, food, general, oil)</html>");
+        wasteTypeLbl.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 102, 0)));
+        
 
         amountTf.addActionListener(this::amountTfActionPerformed);
 
@@ -85,102 +94,137 @@ public class wasteGUI2 extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+            .addComponent(Title)
             .addGroup(layout.createSequentialGroup()
-                .addGap(103, 103, 103)
-                .addComponent(Title, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(amountLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(unitsLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(itemLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(wasteTypeLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(amountTf, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(unitsTf, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(itemTf, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(wasteTypeTf, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25))
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(wasteTypeLbl)
-                        .addComponent(itemLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(unitsLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(amountLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(disposeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(amountTf)
-                                .addContainerGap(119, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(unitsTf, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
-                                .addContainerGap(92, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(itemTf, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
-                                .addContainerGap(92, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(wasteTypeTf, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
-                                .addContainerGap(92, Short.MAX_VALUE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                        .addComponent(endBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 31, Short.MAX_VALUE))))
+                .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(endBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(clearHistoryBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(Title)
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(amountLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(amountTf, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(unitsTf, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(unitsLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(itemTf, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(itemLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(wasteTypeLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(wasteTypeTf, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(64, 64, 64)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(disposeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(endBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(169, Short.MAX_VALUE))
+            layout.createSequentialGroup()
+            .addGap(20, 20, 20)
+            .addComponent(Title)
+            .addGap(35, 35, 35)
+
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(amountLbl)
+                .addComponent(amountTf, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+
+            .addGap(25, 25, 25)
+
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(unitsLbl)
+                .addComponent(unitsTf, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+
+            .addGap(25, 25, 25)
+
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(itemLbl)
+                .addComponent(itemTf, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+
+            .addGap(25, 25, 25)
+
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(wasteTypeLbl)
+                .addComponent(wasteTypeTf, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+
+            .addGap(45, 45, 45)
+
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(endBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+
+            .addGap(15, 15, 15)
+
+            .addComponent(clearHistoryBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+
+            .addGap(25, 25, 25)
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
-
+    }
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
         // TODO add your handling code here:
-        //get text from texfields
+        //get text from texfield
+    if (amountTf.getText().isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Please enter the waste amount.");
+        return;
+    }
+
+    if (unitsTf.getText().isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Please enter the units.");
+        return;
+    }
+
+    if (itemTf.getText().isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Please enter the product name.");
+        return;
+    }
+    if (wasteTypeTf.getText().isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Please enter the waste type.");
+        return;
+}
+
+        
         units = unitsTf.getText();
         item = itemTf.getText();
-        wasteType = wasteTypeTf.getText();
         amount = Double.parseDouble(amountTf.getText());
+        type = wasteTypeTf.getText();
          wasteRecord record = new wasteRecord();
          record.setUnits(units);
          record.setItem(item);
-         record.setWasteType(wasteType);
          record.setWasteAmount(amount);
+         record.setWasteType(type);
         
          //add object to array list
          wasteList.add(record);
+         //save record to file
+         try{
+             File outFile = new File("wasteRecord.txt");
+             FileWriter fw = new FileWriter(outFile, true);
+             BufferedWriter bw = new BufferedWriter(fw);
+             
+            bw.write(Double.toString(amount));
+            bw.newLine();
+            bw.write(units);
+            bw.newLine();
+            bw.write(type);
+            bw.newLine();
+            bw.write(item);
+            bw.newLine();
+           
+             
+             bw.close();
+             
+             JOptionPane.showMessageDialog(null, "record saved successfully");
+             
+             amountTf.setText("");
+             unitsTf.setText("");
+             itemTf.setText("");
+             wasteTypeTf.setText("");
+            
+             
+         } catch(IOException e){
+             JOptionPane.showMessageDialog(null, "error: ");
+         }
         
     }//GEN-LAST:event_saveBtnActionPerformed
-
-    private void disposeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disposeBtnActionPerformed
-        // TODO add your handling code here:
-        wasteType = wasteType.getText();
-        Dispose dsp = new Dispose();
-        dsp.setWasteType(wasteType);
-        JOptionPane.showMessageDialog(null, dsp.getRecommend());
-        
-    }//GEN-LAST:event_disposeBtnActionPerformed
 
     private void endBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_endBtnActionPerformed
         // TODO add your handling code here:
@@ -192,13 +236,28 @@ public class wasteGUI2 extends javax.swing.JFrame {
         double cartonTotal = 0;
         double canTotal = 0;
         double oilTotal = 0;
+        StringBuilder productDetails = new StringBuilder();
         
-        for (int i = 0; i < wasteList.size(); i++) {
-
-        wasteRecord record = wasteList.get(i);
-
-        String type = record.getWasteType();
-        double amount = record.getWasteAmount();
+        try {
+            File in = new File("wasteRecord.txt");
+            FileReader fr = new FileReader(in);
+            BufferedReader br = new BufferedReader(fr);
+            
+        String amountLine;
+        while ((amountLine = br.readLine()) != null) {
+            double amount = Double.parseDouble(amountLine);
+            String units = br.readLine();
+            String type = br.readLine();
+            String item = br.readLine();
+            productDetails.append(item)
+            .append(" - ")
+            .append(amount)
+            .append(" ")
+            .append(units)
+            .append(" (")
+            .append(type)
+            .append(")\n");
+    
 
         if (type.equalsIgnoreCase("plastic")) {
             plasticTotal += amount;
@@ -225,19 +284,27 @@ public class wasteGUI2 extends javax.swing.JFrame {
             oilTotal += amount;
         }
     }
+        br.close();
+        
         JOptionPane.showMessageDialog(null,
-        "WASTE REPORT\n"
-        + "Plastic: " + plasticTotal + "\n"
-        + "Food: " + foodTotal + "\n"
-        + "General: " + generalTotal + "\n"
-        + "Paper: " + paperTotal + "\n"
-        + "Liquid: " + liquidTotal + "\n"
-        + "Carton: " + cartonTotal + "\n"
-        + "Can: " + canTotal + "\n"
-        + "Oil: " + oilTotal
-    );
-    }
-    }//GEN-LAST:event_endBtnActionPerformed
+            "WASTE REPORT\n\n"
+            + "TOTAL WASTE\n"
+            + "Plastic: " + plasticTotal + " kg\n"
+            + "Food: " + foodTotal + " kg\n"
+            + "General: " + generalTotal + " kg\n"
+            + "Paper: " + paperTotal + " kg\n"
+            + "Liquid: " + liquidTotal + " Lt\n"
+            + "Carton: " + cartonTotal + " kg\n"
+            + "Can: " + canTotal + " Lt\n"
+            + "Oil: " + oilTotal + "\n\n"
+            + "PRODUCTS WASTED:\n"
+            + productDetails.toString()
+        );
+    
+   } catch (IOException e){
+            System.out.println(e);
+  }
+}
 
     private void amountTfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_amountTfActionPerformed
         // TODO add your handling code here:
@@ -250,7 +317,19 @@ public class wasteGUI2 extends javax.swing.JFrame {
     private void itemTfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemTfActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_itemTfActionPerformed
+    private void clearHistoryBtnActionPerformed(java.awt.event.ActionEvent evt) {
+    try {
+        FileWriter fw = new FileWriter("wasteRecord.txt", false);
+        fw.close();
 
+        wasteList.clear();
+
+        JOptionPane.showMessageDialog(this, "Waste history cleared successfully!");
+
+    } catch (IOException e) {
+        JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+    }
+}
     /**
      * @param args the command line arguments
      */
@@ -280,7 +359,6 @@ public class wasteGUI2 extends javax.swing.JFrame {
     private javax.swing.JLabel Title;
     private javax.swing.JLabel amountLbl;
     private javax.swing.JTextField amountTf;
-    private javax.swing.JButton disposeBtn;
     private javax.swing.JButton endBtn;
     private javax.swing.JLabel itemLbl;
     private javax.swing.JTextField itemTf;
@@ -289,5 +367,6 @@ public class wasteGUI2 extends javax.swing.JFrame {
     private javax.swing.JTextField unitsTf;
     private javax.swing.JLabel wasteTypeLbl;
     private javax.swing.JTextField wasteTypeTf;
+    private javax.swing.JButton clearHistoryBtn;
     // End of variables declaration//GEN-END:variables
 }
