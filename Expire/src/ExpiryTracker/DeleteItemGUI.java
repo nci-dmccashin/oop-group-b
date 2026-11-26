@@ -16,6 +16,8 @@ public class DeleteItemGUI extends ExpiryTrackerCommonGUI {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(DeleteItemGUI.class.getName());
 
+    private ItemsTable itemsTable;
+    
     /**
      * Creates new form DeleteItemGUI
      */
@@ -26,18 +28,15 @@ public class DeleteItemGUI extends ExpiryTrackerCommonGUI {
     }
     
     private void loadListData() {
-        // Loop over FoodItems and add them to list
-        // Create array of strings for text in list
-        String[] listItemData = new String[foodItems.size()];
-        for (int i = 0; i < foodItems.size(); i++) {
-            listItemData[i] = foodItems.get(i).getName();
-        }
-        itemsList.setListData(listItemData);
+        // Create reusable table and add to panel
+        this.itemsTable = new ItemsTable(foodItems);
+        itemsTable.setSize(tablePanel.getWidth(), tablePanel.getHeight());
+        tablePanel.add(itemsTable);
     }
     
     @Override
     protected void refresh() {
-        loadListData();
+        itemsTable.refresh();
     }
 
     /**
@@ -50,28 +49,31 @@ public class DeleteItemGUI extends ExpiryTrackerCommonGUI {
     private void initComponents() {
 
         titleTL = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        itemsList = new javax.swing.JList<>();
         deleteButton = new javax.swing.JButton();
         refreshButton = new javax.swing.JButton();
+        tablePanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         titleTL.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
         titleTL.setText("Delete an Item");
 
-        itemsList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(itemsList);
-
         deleteButton.setText("Delete");
         deleteButton.addActionListener(this::deleteButtonActionPerformed);
 
         refreshButton.setText("Refresh");
         refreshButton.addActionListener(this::refreshButtonActionPerformed);
+
+        javax.swing.GroupLayout tablePanelLayout = new javax.swing.GroupLayout(tablePanel);
+        tablePanel.setLayout(tablePanelLayout);
+        tablePanelLayout.setHorizontalGroup(
+            tablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        tablePanelLayout.setVerticalGroup(
+            tablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 158, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -80,23 +82,25 @@ public class DeleteItemGUI extends ExpiryTrackerCommonGUI {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(titleTL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1))
+                    .addComponent(tablePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(deleteButton)
-                        .addGap(18, 18, 18)
-                        .addComponent(refreshButton)))
-                .addContainerGap(222, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(titleTL)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(deleteButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(refreshButton)))
+                        .addGap(0, 216, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(titleTL)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(deleteButton)
                     .addComponent(refreshButton))
@@ -108,7 +112,7 @@ public class DeleteItemGUI extends ExpiryTrackerCommonGUI {
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
-        int itemSelectedIndx = itemsList.getSelectedIndex();
+        int itemSelectedIndx = itemsTable.getSelectedRow();
         // Delete selected index from foodItems
         FoodProduct removedItem = foodItems.remove(itemSelectedIndx);
         JOptionPane.showMessageDialog(null, String.format("Item %s (You had %s) has been removed", removedItem.getName(), removedItem.getQuantity()));
@@ -147,9 +151,8 @@ public class DeleteItemGUI extends ExpiryTrackerCommonGUI {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton deleteButton;
-    private javax.swing.JList<String> itemsList;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton refreshButton;
+    private javax.swing.JPanel tablePanel;
     private javax.swing.JLabel titleTL;
     // End of variables declaration//GEN-END:variables
 }

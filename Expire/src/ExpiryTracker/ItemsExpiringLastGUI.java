@@ -15,6 +15,8 @@ public class ItemsExpiringLastGUI extends ExpiryTrackerCommonGUI {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ItemsExpiringLastGUI.class.getName());
 
+    private ItemsTable itemsTable;
+    
     /**
      * Creates new form ItemsExpiringLastGUI
      */
@@ -26,16 +28,10 @@ public class ItemsExpiringLastGUI extends ExpiryTrackerCommonGUI {
     }
     
     private void displayFoodItems() {
-        // Make seperate function as refresh is required if ArrayList changes
-        
-        // Loop over food items and output
-        Iterator<FoodProduct> it = foodItems.iterator();
-        StringBuffer output = new StringBuffer();
-        while (it.hasNext()) {
-            output.append(it.next().printDetails());
-            output.append("\n");
-        }
-        resultsTA.setText(output.toString());
+        // Create ItemsTable and add to panel
+        this.itemsTable = new ItemsTable(foodItems);
+        itemsTable.setSize(tablePanel.getWidth(), tablePanel.getHeight());
+        tablePanel.add(itemsTable);
     }
 
     /**
@@ -50,9 +46,8 @@ public class ItemsExpiringLastGUI extends ExpiryTrackerCommonGUI {
         titleTL = new javax.swing.JLabel();
         subtitleTL = new javax.swing.JLabel();
         itemsNotExpiring7DaysTL = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        resultsTA = new javax.swing.JTextArea();
         refreshBtn = new javax.swing.JButton();
+        tablePanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,13 +58,19 @@ public class ItemsExpiringLastGUI extends ExpiryTrackerCommonGUI {
 
         itemsNotExpiring7DaysTL.setText("No. of items not expiring for 7 days: {x}");
 
-        resultsTA.setEditable(false);
-        resultsTA.setColumns(20);
-        resultsTA.setRows(5);
-        jScrollPane1.setViewportView(resultsTA);
-
         refreshBtn.setText("Refresh");
         refreshBtn.addActionListener(this::refreshBtnActionPerformed);
+
+        javax.swing.GroupLayout tablePanelLayout = new javax.swing.GroupLayout(tablePanel);
+        tablePanel.setLayout(tablePanelLayout);
+        tablePanelLayout.setHorizontalGroup(
+            tablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        tablePanelLayout.setVerticalGroup(
+            tablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 195, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -79,8 +80,8 @@ public class ItemsExpiringLastGUI extends ExpiryTrackerCommonGUI {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                        .addComponent(tablePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(refreshBtn)
                         .addGap(33, 33, 33))
                     .addGroup(layout.createSequentialGroup()
@@ -88,7 +89,7 @@ public class ItemsExpiringLastGUI extends ExpiryTrackerCommonGUI {
                             .addComponent(titleTL)
                             .addComponent(subtitleTL)
                             .addComponent(itemsNotExpiring7DaysTL))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(168, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -99,11 +100,14 @@ public class ItemsExpiringLastGUI extends ExpiryTrackerCommonGUI {
                 .addComponent(subtitleTL)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(itemsNotExpiring7DaysTL)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(refreshBtn))
-                .addContainerGap(23, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(refreshBtn))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(tablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
@@ -111,7 +115,7 @@ public class ItemsExpiringLastGUI extends ExpiryTrackerCommonGUI {
 
     @Override
     public void refresh() {
-        displayFoodItems();
+        itemsTable.refresh();
     }
     
     private void refreshBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshBtnActionPerformed
@@ -146,10 +150,9 @@ public class ItemsExpiringLastGUI extends ExpiryTrackerCommonGUI {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel itemsNotExpiring7DaysTL;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton refreshBtn;
-    private javax.swing.JTextArea resultsTA;
     private javax.swing.JLabel subtitleTL;
+    private javax.swing.JPanel tablePanel;
     private javax.swing.JLabel titleTL;
     // End of variables declaration//GEN-END:variables
 }

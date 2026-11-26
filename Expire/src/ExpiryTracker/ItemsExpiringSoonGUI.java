@@ -109,6 +109,7 @@ public class ItemsExpiringSoonGUI extends ExpiryTrackerCommonGUI {
 
     @Override
     public void refresh() {
+        itemsTable.refresh();
     }
     
     private void refreshBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshBtnActionPerformed
