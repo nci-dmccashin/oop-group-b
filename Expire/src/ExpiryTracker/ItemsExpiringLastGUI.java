@@ -62,6 +62,11 @@ public class ItemsExpiringLastGUI extends ExpiryTrackerCommonGUI {
         tablePanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         titleTL.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
         titleTL.setText("Items Expiring Last");
@@ -135,6 +140,11 @@ public class ItemsExpiringLastGUI extends ExpiryTrackerCommonGUI {
         // TODO add your handling code here:
         refresh();
     }//GEN-LAST:event_refreshBtnActionPerformed
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        // TODO add your handling code here:
+        refresh();
+    }//GEN-LAST:event_formComponentShown
 
     /**
      * @param args the command line arguments
